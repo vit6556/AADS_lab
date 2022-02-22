@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int input_params() {
+int input_num() {
     int num, status, temp;
     status = scanf("%d", &num);
     while(status != 1){
@@ -71,9 +71,9 @@ void print_ans(int m, int n, int *matrix[], int *ans) {
 int main() {
     int m, n;
     printf("Amount of rows: ");
-    m = input_params();
+    m = input_num();
     printf("Amount of cols: ");
-    n = input_params();
+    n = input_num();
 
     int *matrix[n], *ans;
     allocate_memory(m, n, matrix, &ans);
