@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h> 
 
 int input_params() {
     int num, status, temp;
