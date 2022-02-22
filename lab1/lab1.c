@@ -38,14 +38,8 @@ void input_matrix(int m, int n, int *matrix[]) {
 void find_ans(int m, int n, int *matrix[], int *ans) {
     for (int i = 0; i < m; ++i) {
         for (int j = 0; j < n; ++j) {
-            if (i == 0) {
-                if (matrix[i][j] > matrix[m - 1][j]) {
-                    ans[j] += matrix[i][j];
-                }
-            } else {
-                if (matrix[i][j] > matrix[i - 1][j]) {
-                    ans[j] += matrix[i][j];
-                }
+            if (matrix[i][j] > matrix[(i + m - 1) % m][j]) {
+                ans[j] += matrix[i][j];
             }
         }
     }
