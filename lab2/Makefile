@@ -1,10 +1,16 @@
-all: comp
+all: comp_list
 
-comp: lab1.c
-	gcc lab1.c -o lab1.o -std=c99
+comp_list: lab2.c stack_list.c board.c
+	gcc lab2.c stack_list.c board.c -o lab2.o -std=c99
 
-run: all
-	./lab1.o
+comp_array: lab2.c stack_array.c board.c
+	gcc lab2.c stack_array.c board.c -o lab2.o -std=c99
 
-val: all
-	valgrind ./lab1.o
+run_list: comp_list
+	./lab2.o
+
+run_array: comp_array
+	./lab2.o
+
+val: lab2.0
+	valgrind ./lab2.o
