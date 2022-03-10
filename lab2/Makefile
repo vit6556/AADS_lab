@@ -12,5 +12,5 @@ run_list: comp_list
 run_array: comp_array
 	./lab2.o
 
-val: lab2.0
-	valgrind ./lab2.o
+val: lab2.o
+	valgrind --leak-check=full ./lab2.o
