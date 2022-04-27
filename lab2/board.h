@@ -7,6 +7,6 @@ int generate_board(int n, int*board[]);
 void print_board(int n, int *board[]);
 int check_board(int n, int *board[]);
 int get_zero(int n, int *board[]);
-void turn(int *board[], Move m);
+void turn(int *board[], Move* m);
 void free_board(int n, int *matrix[]);
 #endif //BOARD_H

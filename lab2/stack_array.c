@@ -32,11 +32,12 @@ int check_empty(Stack *s) {
     return s->top == 0;
 }
 
-void push(Stack *s, Move value) {
+void push(Stack *s, Move* value) {
     if (s->top >= s->size) {
         resize(s);
     }
-    s->data[s->top] = value;
+    s->data[s->top] = *value;
+    free(value);
     s->top++;
 }
 
@@ -45,8 +46,7 @@ Move pop(Stack *s) {
     return s->data[s->top];
 }
 
-void delete_stack(Stack **s) {
-    free((*s)->data);
-    free(*s);
-    *s = NULL;
+void delete_stack(Stack *s) {
+    free(s->data);
+    free(s);
 }
