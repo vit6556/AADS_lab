@@ -14,13 +14,13 @@ typedef struct Data {
 } Data;
 
 typedef struct Node {
-    Data info; //char*
-    Data next; //struct Node*
+    char *info;
+    struct Node *next;
 } Node;
 
 typedef struct List {
-    Data head; // Node*
-} List;
+    Node *head;
+} List;;
 
 typedef struct KeySpace1 {
     int key;
@@ -38,7 +38,6 @@ typedef struct Table {
     Data ks1;
     Data ks2;
     int msize2;
-    int first_free_pos;
 } Table;
 
 #endif
