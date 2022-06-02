@@ -19,6 +19,9 @@ int main() {
     add_edge(graph, "c", "b", 1);
     add_edge(graph, "a", "c", 7);
     add_edge(graph, "a", "d", 3);
+    add_edge(graph, "f", "d", 3);
+
+    print_graph(graph, "graph.png");
 
     printf("\nList of edges:\n");
     print_graph_list(graph);

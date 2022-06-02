@@ -326,3 +326,18 @@ void clear_memory(Graph *graph) {
     free(graph->edges);
     free(graph);
 }
+
+void print_graph(Graph *graph, char *filename) {
+    FILE *fptr = fopen("graph.dot","w");
+    fprintf(fptr,"digraph GraphViz {\n");
+
+    for (int i = 0; i < graph->edges_amount; ++i) {
+        fprintf(fptr,"\"%s\" -> \"%s\" [label=\"%d\", arrowhead=none];\n", graph->edges[i].from, graph->edges[i].to, graph->edges[i].weight);
+    }
+
+    fprintf(fptr,"}");
+    fclose(fptr);
+    char command[100] = "dot -Tpng graph.dot > ";
+    strcat(command, filename);
+    system(command);
+}
