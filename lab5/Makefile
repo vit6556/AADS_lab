@@ -1,7 +1,7 @@
 all: run
 
-comp: lab5.c struct.h graph.c
-	gcc lab5.c struct.h graph.c -o lab5.o -std=c99
+comp: lab5.c struct.h graph.c queue.c
+	gcc lab5.c struct.h graph.c queue.c -o lab5.o -std=c99
 
 run: comp
 	./lab5.o

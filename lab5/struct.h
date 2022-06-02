@@ -14,3 +14,15 @@ typedef struct Graph {
     Vertex *vertices;
     Edge *edges;
 } Graph;
+
+typedef struct Node {
+    char *info;
+    struct Node *next;
+} Node;
+
+typedef struct Queue {
+    int front, rear, size;
+    unsigned capacity;
+    int* array;
+} Queue;
+
