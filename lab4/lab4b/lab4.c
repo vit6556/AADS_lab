@@ -14,8 +14,10 @@ int main() {
     tree = add(tree, 8, "lion");
     tree = add(tree, 5, "dog");
     tree = add(tree, 2, "sheep");
-
     print_tree(tree, "graph.png", NULL);
+    del(tree, 12);
+
+    print_tree(tree, "graph_after_del.png", NULL);
 
     free_tree(tree);
 }

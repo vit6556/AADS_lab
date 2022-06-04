@@ -21,6 +21,11 @@ Tree* rotate_right(Tree* tree)
 	Tree* p = tree->left;
 	tree->left = p->right;
 	p->right = tree;
+    p->parent = NULL;
+    p->right->parent = p;
+    if (p->right->left != NULL) {
+        p->right->left->parent = p->right;
+    }
 	fix_height(tree);
 	fix_height(p);
 	return p;
@@ -31,6 +36,11 @@ Tree* rotate_left(Tree* tree)
 	Tree* p = tree->right;
 	tree->right = tree->left;
 	p->left = tree;
+    p->parent = NULL;
+    p->left->parent = p;
+    if (p->left->right != NULL) {
+        p->left->right->parent = p->left;
+    }
 	fix_height(tree);
 	fix_height(p);
 	return p;
@@ -158,8 +168,9 @@ int del(Tree *tree, int key) {
     if (to_delete == NULL) return 1;
     
     Tree *replace_with = find_max(to_delete->left);
+    Tree *parent = NULL;
     if (replace_with == NULL) {
-        Tree *parent = to_delete->parent;
+        parent = to_delete->parent;
         if (parent->left != NULL && parent->left->key == to_delete->key) {
             parent->left = NULL;
         }
@@ -168,15 +179,18 @@ int del(Tree *tree, int key) {
             parent->right = NULL;
         }
         free(to_delete);
-        return 0;
     } else {
-        Tree *parent = replace_with->parent;
+        parent = replace_with->parent;
         parent->right = replace_with->left;
 
         to_delete->info = replace_with->info;
         to_delete->key = replace_with->key;
         free(replace_with);
     }
+
+    parent = balance(parent);
+
+    return 0;
 }
 
 
