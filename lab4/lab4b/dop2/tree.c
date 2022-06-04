@@ -92,17 +92,17 @@ void print_tree(Tree *tree, char *filename, FILE *fptr) {
     Tree *right = tree->right;
     if (left != NULL || right != NULL) {
         if (left != NULL) {
-            fprintf(fptr,"\"(%d, '%s', %d)\" -> \"(%d, '%s', %d)\";\n", tree->key, tree->info, tree->height, left->key, left->info, left->height);
+            fprintf(fptr,"\"(%d, %d, %d)\" -> \"(%d, %d, %d)\";\n", tree->key, tree->info, tree->height, left->key, left->info, left->height);
         } else {
             fprintf(fptr,"null_%d [shape=point];\n", tree->key);
-            fprintf(fptr,"\"(%d, '%s', %d)\" -> null_%d;\n", tree->key, tree->info, tree->height, tree->key);
+            fprintf(fptr,"\"(%d, %d, %d)\" -> null_%d;\n", tree->key, tree->info, tree->height, tree->key);
         }
 
         if (right != NULL) {
-            fprintf(fptr,"\"(%d, '%s', %d)\" -> \"(%d, '%s', %d)\";\n", tree->key, tree->info, tree->height, right->key, right->info, right->height);
+            fprintf(fptr,"\"(%d, %d, %d)\" -> \"(%d, %d, %d)\";\n", tree->key, tree->info, tree->height, right->key, right->info, right->height);
         } else {
             fprintf(fptr,"null_%d [shape=point];\n", tree->key);
-            fprintf(fptr,"\"(%d, '%s', %d)\" -> null_%d;\n", tree->key, tree->info, tree->height, tree->key);
+            fprintf(fptr,"\"(%d, %d, %d)\" -> null_%d;\n", tree->key, tree->info, tree->height, tree->key);
         }
     }
     print_tree(left, filename, fptr);
@@ -117,7 +117,7 @@ void print_tree(Tree *tree, char *filename, FILE *fptr) {
     }
 }
 
-Tree* add(Tree* tree, int key, char *info) {
+Tree* add(Tree* tree, int key, int info) {
 	if (!tree) {
         Tree *new_node = malloc(sizeof(Tree));
         new_node->key = key;
@@ -131,8 +131,10 @@ Tree* add(Tree* tree, int key, char *info) {
 		tree->left = add(tree->left, key, info);
 	else if (key > tree->key)
 		tree->right = add(tree->right, key, info);
-    else
-        tree->info = info;
+    else {
+        tree->info += info;
+        return tree;
+    }
 
 	return balance(tree);
 }
@@ -196,11 +198,11 @@ int del(Tree *tree, int key) {
 }
 
 
-void traversal(Tree *tree) {
+void traversal(Tree *tree, FILE *fp) {
     if (tree == NULL) return;
-    printf("(%d, '%s')\n", tree->key, tree->info);
-    traversal(tree->left);
-    traversal(tree->right);
+    fprintf(fp, "(%d, '%d')\n", tree->key - 48, tree->info);
+    traversal(tree->left, fp);
+    traversal(tree->right, fp);
 }
 
 void free_tree(Tree *tree) {
